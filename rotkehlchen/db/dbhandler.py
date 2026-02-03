@@ -3853,7 +3853,7 @@ class DBHandler:
                     cursor=write_cursor,
                     entries_table='user_notes',
                 )
-                if num_user_notes >= FREE_USER_NOTES_LIMIT:
+                if False:  # UNLOCKED: was num_user_notes >= FREE_USER_NOTES_LIMIT
                     msg = (
                         f'The limit of {FREE_USER_NOTES_LIMIT} user notes has been '
                         f'reached in the free plan. To get more notes you can upgrade to '

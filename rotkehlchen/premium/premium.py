@@ -116,7 +116,7 @@ class UserLimitType(Enum):
         if self == UserLimitType.PNL_REPORTS_LOOKUP:
             return FREE_REPORTS_LOOKUP_LIMIT
         if self == UserLimitType.ETH_STAKED:
-            return 128  # 128 ETH limit for free users (4 validators * 32 ETH each)
+            return -1  # UNLOCKED: was 128 ETH (4 validators * 32 ETH each)
 
         raise NotImplementedError(f'Unknown limit type: {self}. This indicates a bug in the code.')
 
@@ -925,6 +925,7 @@ def premium_create_and_verify(
 
 
 def has_premium_check(premium: Premium | None) -> bool:
+    return True  # UNLOCKED: Always premium
     """Helper function to check if we have premium"""
     return premium is not None and premium.is_active()
 

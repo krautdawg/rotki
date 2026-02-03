@@ -5,9 +5,9 @@ import { ApiValidationError, type ValidationErrors } from '@/types/api/errors';
 import { logger } from '@/utils/logging';
 
 export const usePremiumStore = defineStore('session/premium', () => {
-  const premium = ref<boolean>(false);
+  const premium = ref<boolean>(true);  // UNLOCKED
   const premiumSync = ref<boolean>(false);
-  const capabilities = ref<PremiumCapabilities>();
+  const capabilities = ref<PremiumCapabilities>({ ethStakingView: true, graphsView: true, eventAnalysisView: true });  // UNLOCKED
 
   const api = usePremiumCredentialsApi();
 

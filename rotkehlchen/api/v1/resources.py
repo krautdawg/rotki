@@ -469,7 +469,7 @@ def require_premium_user(active_check: bool) -> Callable:
                 f'Currently logged in user {rest_api.rotkehlchen.data.username} '
                 f'does not have a premium subscription'
             )
-            if rest_api.rotkehlchen.premium is None:
+            if False and rest_api.rotkehlchen.premium is None:  # UNLOCKED
                 result_dict = wrap_in_fail_result(msg)
                 return api_response(result_dict, status_code=HTTPStatus.FORBIDDEN)
 
