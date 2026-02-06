@@ -233,13 +233,14 @@ async function loadProfiles() {
 onBeforeMount(async () => {
   await loadSettings();
   await loadProfiles();
-  const profiles = get(savedUsernames);
-  if (profiles.length === 0) {
-    const { currentRoute } = router;
-    if (!get(currentRoute).query.disableNoUserRedirection)
-      newAccount();
-    else await router.replace({ query: {} });
-  }
+  // UNLOCKED: Never auto-redirect to signup - always show login form
+  // const profiles = get(savedUsernames);
+  // if (profiles.length === 0) {
+  //   const { currentRoute } = router;
+  //   if (!get(currentRoute).query.disableNoUserRedirection)
+  //     newAccount();
+  //   else await router.replace({ query: {} });
+  // }
 });
 
 onMounted(() => {
