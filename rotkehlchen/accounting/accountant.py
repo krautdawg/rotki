@@ -126,14 +126,14 @@ class Accountant:
 
         Returns the id of the generated report
         """
-        active_premium = self.premium and self.premium.is_active()
+        active_premium = True  # UNLOCKED: Always premium
         log.info(
             'Start of history processing',
             start_ts=start_ts,
             end_ts=end_ts,
             active_premium=active_premium,
         )
-        events_limit = -1 if active_premium else FREE_PNL_EVENTS_LIMIT
+        events_limit = -1  # UNLOCKED: No limit
         # Ask the DB for the settings once at the start of processing so we got the
         # same settings through the entire task
         with self.db.conn.read_ctx() as cursor:

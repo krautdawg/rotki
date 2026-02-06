@@ -125,7 +125,7 @@ class Eth2(EthereumModule):
 
         balance_mapping = self.beacon_inquirer.get_balances(
             indices_or_pubkeys=list(pubkey_to_ownership.keys()),
-            has_premium=self.premium is not None,
+            has_premium=True,  # UNLOCKED
         )
 
         total_staked = ZERO
@@ -626,7 +626,7 @@ class Eth2(EthereumModule):
         # Get the actual validator balance (to check the staking limit)
         balance_mapping = self.beacon_inquirer.get_balances(
             indices_or_pubkeys=[result[0].public_key],
-            has_premium=self.premium is not None,
+            has_premium=True,  # UNLOCKED
         )
         if (validator_balance := balance_mapping.get(result[0].public_key)) is None:
             raise RemoteError(f'No balance was returned for validator {result[0].public_key}')

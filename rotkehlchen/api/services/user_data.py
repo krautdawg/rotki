@@ -132,7 +132,7 @@ class UserDataService:
             user_notes, entries_found = self.rotkehlchen.data.db.get_user_notes_and_limit_info(
                 filter_query=filter_query,
                 cursor=cursor,
-                has_premium=self.rotkehlchen.premium is not None,
+                has_premium=True,  # UNLOCKED
             )
             user_notes_total = self.rotkehlchen.data.db.get_entries_count(
                 cursor=cursor,
@@ -143,7 +143,7 @@ class UserDataService:
             'entries': entries,
             'entries_found': entries_found,
             'entries_total': user_notes_total,
-            'entries_limit': FREE_USER_NOTES_LIMIT if self.rotkehlchen.premium is None else -1,
+            'entries_limit': -1,  # UNLOCKED
         }
         return {'result': result, 'message': '', 'status_code': HTTPStatus.OK}
 
@@ -160,7 +160,7 @@ class UserDataService:
                 content=content,
                 location=location,
                 is_pinned=is_pinned,
-                has_premium=self.rotkehlchen.premium is not None,
+                has_premium=True,  # UNLOCKED
             )
         except InputError as e:
             return {'result': None, 'message': str(e), 'status_code': HTTPStatus.CONFLICT}

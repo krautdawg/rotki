@@ -1398,7 +1398,7 @@ class Rotkehlchen:
 
     def get_settings(self, cursor: 'DBCursor') -> DBSettings:
         """Returns the db settings with a check whether premium is active or not"""
-        return self.data.db.get_settings(cursor, have_premium=self.premium is not None)
+        return self.data.db.get_settings(cursor, have_premium=True)  # UNLOCKED: Always premium
 
     def setup_exchange(
             self,

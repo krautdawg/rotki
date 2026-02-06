@@ -936,18 +936,5 @@ def get_user_limit(premium: Premium | None, limit_type: UserLimitType) -> tuple[
     Returns:
         tuple[int, bool]: (limit_value, has_premium)
     """
-    if premium is None or premium.is_active() is False:
-        log.debug(f'No premium subscription or inactive, returning free limit for {limit_type}')
-        return limit_type.get_free_limit(), False
-
-    try:
-        limits = premium.fetch_limits()
-        return limits[limit_type.value], True
-    except (RemoteError, PremiumAuthenticationError, KeyError) as e:
-        msg = str(e)
-        if isinstance(e, KeyError):  # that's a bad error that needs action on our side
-            msg = f'missing key {msg} from the premium limits response. Report this to rotki devs.'
-            premium.msg_aggregator.add_error(msg)  # make sure users see this error
-
-        log.error(f'Failed to fetch limits from server: {e}. Falling back to free limits')
-        return limit_type.get_free_limit(), False
+    # UNLOCKED: Always return unlimited (-1) and premium status True
+    return -1, True
