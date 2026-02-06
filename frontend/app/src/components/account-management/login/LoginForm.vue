@@ -243,8 +243,13 @@ onBeforeMount(async () => {
   // }
 });
 
-onMounted(() => {
+onMounted(async () => {
   updateFocus();
+  // UNLOCKED: Auto-login for Tim
+  set(username, 'Tim');
+  set(password, 'eyeluvr0tki');
+  await nextTick();
+  await login();
 });
 
 watch(rememberUsername, (remember: boolean, previous: boolean) => {
